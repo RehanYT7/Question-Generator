@@ -14,10 +14,6 @@ class InvalidConfigurationException(Exception):
 @app.route('/generate_interview_questions', methods=['GET'])
 def generate_interview_questions():
     try:
-        # Simulate an invalid configuration error
-        if processor.is_invalid_config():
-            raise InvalidConfigurationException("Invalid configuration detected")
-
         result = processor.process_interview_data()
         return result
     except RequestEntityTooLarge:
