@@ -1,0 +1,11 @@
+{
+  "MySQL": {
+    "server": "localhost",
+    "database": "test_ai",
+    "username": "root",
+    "password": "root"
+  },
+  "OpenAI": {
+    "api_key": "Add your api key"
+  }
+}
