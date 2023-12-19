@@ -1,0 +1,6 @@
+pandas
+flask
+werkzeug
+logging
+langchain
+sqlalchemy
