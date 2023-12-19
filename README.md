@@ -43,6 +43,7 @@ pip install -r requirements.txt
       }
 
 ### Code Explaination
+#### For interview_questions_generator.py
 #### Class: InterviewDataProcessor
 This class is designed to handle the processing of interview data, including the generation of interview questions using the OpenAI API and the storage of generated questions and answers in a MySQL database.
 #### __init__(self, config_file_path, log_file_path='std.log')
@@ -102,27 +103,37 @@ The script uses a MySQL database with the following table schema:
       );
 This table structure stores information about the generated interview questions, including the skill, skill level, actual questions, correct answers, and the timestamp of the generation.
 
-### Summary
-The script performs the following steps:
+### For app.py
 
-#### Load Configuration:
+This Flask application defines a single route /generate_interview_questions that simulates the generation of interview questions by calling the process_interview_data() method of the InterviewDataProcessor instance.
 
-Loads configuration settings from config.json.
-#### Setup Logging:
+The application handles specific HTTP error codes using werkzeug.exceptions and returns corresponding JSON responses.
 
-Initializes logging to a file specified in the configuration.
-#### Database Connection:
+The InvalidConfigurationException is a custom exception that can be raised during the processing of interview data. If this exception is caught, the application returns a JSON response indicating an invalid configuration.
 
-Establishes a connection to the MySQL database using the provided credentials.
-#### Delete Old Records:
+The Flask application can be run locally using app.run(debug=False).
 
-Deletes old records from the interview_questions_generated table based on a specified timestamp. This helps maintain a relevant dataset.
-#### Generate Interview Questions:
+### Endpoints
+#### Generate Interview Questions
+1. Endpoint: /generate_interview_questions
 
-Iterates over the input data, generating interview questions for each skill and skill level using the OpenAI API.
-#### Insert into Database:
+2. Method: GET
 
-Inserts the generated questions and answers into the interview_questions_generated table along with a timestamp.
+3. Description: Simulates the generation of interview questions based on the provided configuration.
 
+4. Response: JSON response with the generated interview questions or error details.
+
+#### Exception Handling
+The application handles various exceptions and returns appropriate HTTP responses with JSON messages. Specific exceptions include:
+
+RequestEntityTooLarge: 413 - The request entity is too large.
+
+NotFound: 404 - Resource not found.
+
+BadRequest: 400 - Bad request.
+
+InvalidConfigurationException: 400 - Invalid configuration error.
+
+InternalServerError: 500 - Internal Server Error.
 
  
